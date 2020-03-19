@@ -24,11 +24,15 @@ export class Detail extends React.Component<RedditListProps> {
   openImage = (url: string) => {
     window.open(url, "_blank");
   }
+  addToGalery = (image: string) => {
+    const { addToGalery } = this.props.redditStore!;
+    addToGalery(image)
+  }
   render() {
     const { selected } = this.props.redditStore!;
     return (
       <div bp="padding" className={selected == "" ? "card hide detail" : "card detail"}>
-        {selected && <div>
+        {(selected && this.selectedItem) && <div>
           <div><b>{this.selectedItem.title}</b></div>
           <div className="imgDiv">
             {(this.selectedItem.thumbnail && this.selectedItem.thumbnail !== "default") && 
@@ -46,6 +50,8 @@ export class Detail extends React.Component<RedditListProps> {
             <div>
               <div bp="grid 3 6@md">
                 <button bp="padding" onClick={() => this.dismiss()}>Dissmiss</button>
+                { (this.selectedItem.thumbnail && this.selectedItem.thumbnail !== "default") && 
+                  <button bp="padding" onClick={() => this.addToGalery(this.selectedItem.thumbnail)}>Add</button>}
               </div>
             </div>
           </div>

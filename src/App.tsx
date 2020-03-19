@@ -6,14 +6,20 @@ import { Provider } from 'mobx-react'
 import { RedditStore } from './store/reddit'
 import { List } from './List'
 import { Detail } from './Detail'
+import { Gallery } from './Gallery'
 class App extends React.Component<{}> {
   private redditStore: RedditStore = new RedditStore()
   render(){
     return (
       <Provider redditStore={this.redditStore}>
-        <div bp="grid 6@lg">
-          <div><List/></div>
-          <div><Detail /></div>
+        <div>
+          <div bp="grid 6@lg">
+            <div><List/></div>
+            <div>
+              <Detail />
+              <Gallery />
+            </div>
+          </div>
         </div>
       </Provider>
     );

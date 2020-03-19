@@ -78,3 +78,7 @@ button:hover {
 img:hover {
   cursor: pointer;
 }
+
+.galery {
+  padding: 1%;
+}
