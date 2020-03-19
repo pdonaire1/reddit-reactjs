@@ -33,7 +33,7 @@ export class Paginator extends React.Component<RedditListProps> {
           </button>
           {page} of {pages}
           <button
-            className={page === 5 ? "disabled" : ""}
+            className={page === pages ? "disabled" : ""}
             disabled={page === pages}
             onClick={() => this.changePage(page+1)}>
             Next

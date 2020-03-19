@@ -19,13 +19,14 @@ export class RedditStore {
   @observable error: boolean = false
   @observable loading: boolean = false
   @observable page: number = 1
-  @observable limit: number = 10
+  @observable limit: number = 5
   @observable pages: number = 5
   @observable selected: string = ""
   @observable galery: string[] = []
   
   constructor(){
     this.redditList = observable([]);
+    this.limit = 5;
     autoSave(this);
   }
 

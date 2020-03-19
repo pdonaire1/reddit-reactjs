@@ -4,7 +4,7 @@ export class RedditService {
   requestRedditPosts(page:number = 1, limit:number = 10): any{
     return fetch(this.url + `top?page=${page}&limit=${limit}`, {
       headers: {
-         'Accept': 'application/json',
+        'Accept': 'application/json'
       },
       method: "GET"
     }).then(res => res.json());
