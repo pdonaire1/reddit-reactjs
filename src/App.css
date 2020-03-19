@@ -43,6 +43,13 @@ button {
   font-weight: bold;
   border: none;
   border-radius: 3%;
+  padding: 1%;
+}
+button.disabled {
+  background: grey;
+}
+button:hover {
+  cursor: pointer;
 }
 
 .card {
@@ -54,8 +61,9 @@ button {
   transition: height 500ms 500ms, opacity 500ms 0ms;
   opacity: 0.0;
 }
-
-
+.card.detail {
+  padding-top: 9% !important;
+}
 .card > div {
   padding: 2%;
   background: #f3f9fc;
@@ -66,4 +74,7 @@ button {
 
 .imgDiv {
   margin: auto;
+}
+img:hover {
+  cursor: pointer;
 }

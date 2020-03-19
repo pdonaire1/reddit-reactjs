@@ -21,15 +21,18 @@ export class Detail extends React.Component<RedditListProps> {
     const { dismiss } = this.props.redditStore!;
     dismiss()
   }
+  openImage = (url: string) => {
+    window.open(url, "_blank");
+  }
   render() {
     const { selected } = this.props.redditStore!;
     return (
-      <div bp="padding" className={selected == "" ? "card hide" : "card"}>
+      <div bp="padding" className={selected == "" ? "card hide detail" : "card detail"}>
         {selected && <div>
           <div><b>{this.selectedItem.title}</b></div>
           <div className="imgDiv">
             {(this.selectedItem.thumbnail && this.selectedItem.thumbnail !== "default") && 
-              <img src={this.selectedItem.thumbnail} />}
+              <img onClick={() => this.openImage(this.selectedItem.thumbnail)} src={this.selectedItem.thumbnail} />}
           </div>
           <div bp="grid 6@lg">
             <div>
@@ -37,12 +40,12 @@ export class Detail extends React.Component<RedditListProps> {
                 <div>By: {this.selectedItem.author}</div>
                 <div>Posted: {this.selectedItem.entryDate}</div>
                 <div>Comments: {this.selectedItem.commentsCount}</div>
-                <div>Status: {this.selectedItem.status}</div>
+                <div>Visited: {this.selectedItem.status ? "yes" : "no"}</div>
               </div>
             </div>
             <div>
               <div bp="grid 3 6@md">
-                <button onClick={() => this.dismiss()}>Dissmiss</button>
+                <button bp="padding" onClick={() => this.dismiss()}>Dissmiss</button>
               </div>
             </div>
           </div>

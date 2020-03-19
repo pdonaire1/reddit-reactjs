@@ -1,5 +1,6 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action, autorun } from 'mobx'
 import { RedditService } from "../services/reddit";
+import autoSave from "./autoStorage"
 import { runInThisContext } from 'vm';
 const client = new RedditService();
 
@@ -19,11 +20,12 @@ export class RedditStore {
   @observable loading: boolean = false
   @observable page: number = 1
   @observable limit: number = 10
-  pages: number = 5 // Math.ceil(this.page/this.limit)
+  @observable pages: number = 5
   @observable selected: string = ""
   
   constructor(){
     this.redditList = observable([]);
+    autoSave(this);
   }
 
   @action selectId = (id: string) => {
@@ -33,13 +35,26 @@ export class RedditStore {
     this.selected = "";
   }
   @action
+  removePosts = () => {
+    this.redditList = [];
+    this.page = 1;
+    this.selected = "";
+  }
+  @action
+  changePage = (page:number) => {
+    this.page = page;
+    this.selected = "";
+    this.requestList();
+  }
+  @action
   requestList = async () => {
     this.error = false;
     this.loading = true;
-    const response = await client.requestRedditPosts();
+    const response = await client.requestRedditPosts(this.page, this.limit);
 
     if (!response.length) {
       this.error = true;
+      this.redditList = [];
     } else {
       this.redditList = response.map( (post: any) => {
         return {
