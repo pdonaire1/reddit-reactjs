@@ -1,5 +1,6 @@
 import { observable, action, computed } from 'mobx'
 import { RedditService } from "../services/reddit";
+import { runInThisContext } from 'vm';
 const client = new RedditService();
 
 export interface Reddit {
@@ -25,13 +26,11 @@ export class RedditStore {
     this.redditList = observable([]);
   }
 
-  @computed
-  public get selectedItem():any  {
-    return this.redditList.find((post) => post.id === this.selected);
-  }
-
   @action selectId = (id: string) => {
     this.selected = id;
+  }
+  @action dismiss = () => {
+    this.selected = "";
   }
   @action
   requestList = async () => {
@@ -39,10 +38,10 @@ export class RedditStore {
     this.loading = true;
     const response = await client.requestRedditPosts();
 
-    if (!response.data) {
+    if (!response.length) {
       this.error = true;
     } else {
-      this.redditList = response.data.children.map( (post: any) => {
+      this.redditList = response.map( (post: any) => {
         return {
           id: post.data.id,
           title: post.data.title,

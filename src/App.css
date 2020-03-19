@@ -47,7 +47,14 @@ button {
 
 .card {
   padding: 0.5%;
+  opacity: 1.0;
+  transition: height 500ms 0ms, opacity 500ms 500ms;
 }
+.card.hide {
+  transition: height 500ms 500ms, opacity 500ms 0ms;
+  opacity: 0.0;
+}
+
 
 .card > div {
   padding: 2%;
