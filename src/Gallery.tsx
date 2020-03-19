@@ -37,7 +37,7 @@ export class Gallery extends React.Component<RedditListProps> {
           {galery.map((image, i) => 
               <div className="gallery">
                 <img src={image} onClick={() => this.openImage(image)}/>
-                <button onClick={() => this.removeImage(i)}>Remove</button>
+                <div bp="padding"><button onClick={() => this.removeImage(i)}>Remove</button></div>
               </div>)}
         </div>
       </div>
