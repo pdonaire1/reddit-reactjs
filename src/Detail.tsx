@@ -9,7 +9,7 @@ interface RedditListProps {
 
 @inject('redditStore')
 @observer
-export class List extends React.Component<RedditListProps> {
+export class Detail extends React.Component<RedditListProps> {
   
 
   render() {

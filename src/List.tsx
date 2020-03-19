@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component } from 'react'
 import { observable } from 'mobx'
 import { observer, inject } from 'mobx-react'
-import { RedditStore } from './store/reddit'
+import { RedditStore, Reddit } from './store/reddit'
 
 interface RedditListProps {
   redditStore?: RedditStore
@@ -12,32 +12,29 @@ interface RedditListProps {
 @inject('redditStore')
 @observer
 export class List extends React.Component<RedditListProps> {
-  @observable private task: string = ''
-  handleTaskChange = ({ currentTarget: { value } }: React.SyntheticEvent<HTMLInputElement>) => {
-    this.task = value
-  }
 
-  handleAddTodo = () => {
+  componentDidMount = () => {
     const { requestList } = this.props.redditStore!;
-    requestList(this.task);
-    this.task = ''
+    requestList();
   }
-
+  selectItem = (id: string) => {
+    const { selectId } = this.props.redditStore!;
+    selectId(id);
+  }
   render() {
+    const { redditList } = this.props.redditStore!;
     return (
       <div>
-        <label>New Task</label>
-        <input value={this.task} onChange={this.handleTaskChange} />
-        <button onClick={this.handleAddTodo}>Add</button>
+        { redditList.map((post, index) => {
+          return <div key={index} onClick={() => this.selectItem(post.id)}>
+            <div><b>{post.title}</b></div>
+            {post.thumbnail && <img src={post.thumbnail} />}
+            by: {post.author}
+          </div>
+        }) }
+        
       </div>
     )
   }
-  // render(){
-  //   return (
-  //     <div>
-  //         List
-  //     </div>
-  //   );
-  // }
 }
 
