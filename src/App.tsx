@@ -13,6 +13,7 @@ class App extends React.Component<{}> {
     return (
       <Provider redditStore={this.redditStore}>
         <div>
+          <h1>Reddit Top Posts</h1>
           <div bp="grid 6@lg">
             <div><List/></div>
             <div>
