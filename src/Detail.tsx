@@ -35,7 +35,7 @@ export class Detail extends React.Component<RedditListProps> {
         {(selected && this.selectedItem) && <div>
           <div><b>{this.selectedItem.title}</b></div>
           <div className="imgDiv">
-            {(this.selectedItem.thumbnail && this.selectedItem.thumbnail !== "default") && 
+            {(this.selectedItem.thumbnail && (this.selectedItem.thumbnail !== "default" && this.selectedItem.thumbnail !== "image")) && 
               <img onClick={() => this.openImage(this.selectedItem.thumbnail)} src={this.selectedItem.thumbnail} />}
           </div>
           <div bp="grid 6@lg">

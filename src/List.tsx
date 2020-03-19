@@ -35,7 +35,7 @@ export class List extends React.Component<RedditListProps> {
             <div bp="grid 3 6@md">
               <div><b>{post.title}</b></div>
               <div className="imgDiv">
-                {(post.thumbnail && post.thumbnail !== "default") && 
+                {(post.thumbnail && (post.thumbnail !== "default" && post.thumbnail !== "image")) && 
                   <img onClick={() => this.openImage(post.thumbnail)} src={post.thumbnail} />}
               </div>
               <div bp="grid">

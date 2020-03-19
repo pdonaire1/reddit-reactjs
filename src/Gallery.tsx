@@ -22,14 +22,20 @@ export class Gallery extends React.Component<RedditListProps> {
     const { removeFromGalery } = this.props.redditStore!;
     removeFromGalery(i);
   }
+  resetGalery = () => {
+    const { resetGalery } = this.props.redditStore!;
+    resetGalery();
+  }
   render() {
     const { galery } = this.props.redditStore!;
     return (
       <div>
         <h3>Galery</h3>
-        <div bp="padding grid">
+        <button bp="padding" onClick={() => this.resetGalery()}>Reset Gallery</button>
+        {galery.length === 0 && <div>No images added</div>}
+        <div bp="padding grid 4">
           {galery.map((image, i) => 
-              <div className="galery">
+              <div className="gallery">
                 <img src={image} onClick={() => this.openImage(image)}/>
                 <button onClick={() => this.removeImage(i)}>Remove</button>
               </div>)}
