@@ -12,7 +12,6 @@ interface RedditListProps {
 @inject('redditStore')
 @observer
 export class List extends React.Component<RedditListProps> {
-
   componentDidMount = () => {
     const { requestList } = this.props.redditStore!;
     requestList();
@@ -24,14 +23,24 @@ export class List extends React.Component<RedditListProps> {
   render() {
     const { redditList, error, loading } = this.props.redditStore!;
     return (
-      <div>
+      <div bp="padding" >
         { error && <div>Error in Server, try refreshing the page</div> }
         { loading && <div>Loading...</div> }
+
         { redditList.map((post, index) => {
-          return <div key={index} onClick={() => this.selectItem(post.id)}>
-            <div><b>{post.title}</b></div>
-            {post.thumbnail && <img src={post.thumbnail} />}
-            by: {post.author}
+          return <div key={index} className="card">
+            <div bp="grid 3 6@md">
+              <div><b>{post.title}</b></div>
+              <div className="imgDiv">
+                {(post.thumbnail && post.thumbnail !== "default") && 
+                  <img src={post.thumbnail} />}
+              </div>
+              <div bp="grid">
+                <div>Date: {post.entryDate}</div>
+                <div>By: {post.author}</div>
+              </div>
+              <button onClick={() => this.selectItem(post.id)}>Details</button>
+            </div>
           </div>
         }) }
         

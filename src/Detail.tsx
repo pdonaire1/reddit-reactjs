@@ -13,11 +13,12 @@ export class Detail extends React.Component<RedditListProps> {
   
 
   render() {
-    const { details } = this.props.redditStore!;
-    console.log("details:", details)
+    const { selectedItem, selected } = this.props.redditStore!;
+    console.log("details:", selectedItem)
     return (
       <div>
-        Details
+        Details {selected}
+        {selectedItem && selectedItem.id}
       </div>
     )
   }

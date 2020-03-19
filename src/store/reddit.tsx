@@ -16,13 +16,17 @@ export class RedditStore {
   redditList: Reddit[] = []
   @observable error: boolean = false
   @observable loading: boolean = false
-  selected: string = ""
-
+  @observable page: number = 1
+  @observable limit: number = 10
+  pages: number = 5 // Math.ceil(this.page/this.limit)
+  @observable selected: string = ""
+  
   constructor(){
     this.redditList = observable([]);
   }
 
-  @computed get details(): any {
+  @computed
+  public get selectedItem():any  {
     return this.redditList.find((post) => post.id === this.selected);
   }
 
@@ -34,7 +38,7 @@ export class RedditStore {
     this.error = false;
     this.loading = true;
     const response = await client.requestRedditPosts();
-    console.log(response);
+
     if (!response.data) {
       this.error = true;
     } else {

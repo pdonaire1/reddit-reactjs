@@ -11,9 +11,9 @@ class App extends React.Component<{}> {
   render(){
     return (
       <Provider redditStore={this.redditStore}>
-        <div bp="grid">
-          <div bp="6"><List/></div>
-          <div bp="6"><Detail /></div>
+        <div bp="grid 6@lg">
+          <div><List/></div>
+          <div><Detail /></div>
         </div>
       </Provider>
     );

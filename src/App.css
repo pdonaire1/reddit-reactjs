@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+button {
+  background: #426c97;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 3%;
+}
+
+.card {
+  padding: 0.5%;
+}
+
+.card > div {
+  padding: 2%;
+  background: #f3f9fc;
+  border-radius: 3%;
+  border-style: groove;
+  border-color: #fafafa;
+}
+
+.imgDiv {
+  margin: auto;
+}
