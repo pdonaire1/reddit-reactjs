@@ -22,9 +22,11 @@ export class List extends React.Component<RedditListProps> {
     selectId(id);
   }
   render() {
-    const { redditList } = this.props.redditStore!;
+    const { redditList, error, loading } = this.props.redditStore!;
     return (
       <div>
+        { error && <div>Error in Server, try refreshing the page</div> }
+        { loading && <div>Loading...</div> }
         { redditList.map((post, index) => {
           return <div key={index} onClick={() => this.selectItem(post.id)}>
             <div><b>{post.title}</b></div>

@@ -13,9 +13,11 @@ export class Detail extends React.Component<RedditListProps> {
   
 
   render() {
+    const { details } = this.props.redditStore!;
+    console.log("details:", details)
     return (
       <div>
-        
+        Details
       </div>
     )
   }

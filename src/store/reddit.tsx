@@ -14,12 +14,16 @@ export interface Reddit {
 
 export class RedditStore {
   redditList: Reddit[] = []
-  error: boolean = false
+  @observable error: boolean = false
+  @observable loading: boolean = false
   selected: string = ""
 
   constructor(){
     this.redditList = observable([]);
-    this.selected = observable("");
+  }
+
+  @computed get details(): any {
+    return this.redditList.find((post) => post.id === this.selected);
   }
 
   @action selectId = (id: string) => {
@@ -28,6 +32,7 @@ export class RedditStore {
   @action
   requestList = async () => {
     this.error = false;
+    this.loading = true;
     const response = await client.requestRedditPosts();
     console.log(response);
     if (!response.data) {
@@ -45,6 +50,7 @@ export class RedditStore {
         }
       });
     }
+    this.loading = false;
   }
 }
 
